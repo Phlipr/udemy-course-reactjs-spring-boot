@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import CounterButton from './CounterButton'
 import './Counter.css'
 
 class Counter extends Component {
@@ -12,32 +13,49 @@ class Counter extends Component {
         }
 
         this.increment = this.increment.bind(this);
+        this.decrement = this.decrement.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     render () {
         return (
             <div className="Counter">
-                <button onClick={this.increment}>+{this.props.by}</button>
+                <CounterButton incrementMethod={this.increment} decrementMethod={this.decrement}></CounterButton>
+                <CounterButton by={5} incrementMethod={this.increment} decrementMethod={this.decrement}></CounterButton>
+                <CounterButton by={10} incrementMethod={this.increment} decrementMethod={this.decrement}></CounterButton>
                 <span className="count">
                     {this.state.counter}
                 </span>
+                <div>
+                    <button className="reset" onClick={this.reset}>Reset</button>
+                </div>
             </div>
         );
     }
 
-    increment () {
-        this.setState({
-            counter: this.state.counter + this.props.by
-        });
+    reset () {
+        this.setState(
+            () => {
+                return {counter : 0}
+            }
+        );
     }
-}
 
-Counter.defaultProps = {
-    by : 1
-}
+    increment (by) {
+        this.setState(
+            (prevState) => {
+                return {counter: prevState.counter + by}
+            }
+        );
+    }
 
-Counter.propTypes = {
-    by : PropTypes.number
+    decrement (by) {
+        this.setState(
+            (prevState) => {
+                return {counter: prevState.counter - by}
+            }
+        );
+    }
 }
 
 export default Counter;
