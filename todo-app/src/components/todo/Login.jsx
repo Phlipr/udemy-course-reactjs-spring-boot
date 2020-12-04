@@ -26,7 +26,7 @@ class Login extends Component {
 
     handleLogin() {
         if (this.state.username === "PReynolds" && this.state.password === "Unique") {
-            this.props.history.push('/welcome')
+            this.props.history.push(`/welcome/${this.state.username}`)
             this.setState( { hasInvalidLogin : false } )  
         }
         else {
