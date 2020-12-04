@@ -8,7 +8,8 @@ class Login extends Component {
 
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            hasInvalidLogin: false
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -26,6 +27,10 @@ class Login extends Component {
     handleLogin() {
         if (this.state.username === "PReynolds" && this.state.password === "Unique") {
             this.props.history.push('/welcome')
+            this.setState( { hasInvalidLogin : false } )  
+        }
+        else {
+            this.setState( { hasInvalidLogin : true } )
         }
     }
     
@@ -41,6 +46,7 @@ class Login extends Component {
                                  value={this.state.password}
                                  onChange={this.handleChange}></input>
                 <button onClick={this.handleLogin}>Login</button>
+                {this.state.hasInvalidLogin && <div className="Error">Invalid login credentials.</div>}
             </div>
         )
     }
