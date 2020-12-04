@@ -9,9 +9,6 @@ import TodoList from './TodoList'
 import HeaderComponent from './Header'
 import FooterComponent from './Footer'
 
-
-import './bootstrap.css'
-
 class TodoApp extends Component {
     render() {
         return (
