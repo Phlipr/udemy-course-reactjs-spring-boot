@@ -6,6 +6,7 @@ import Login from './Login'
 import Welcome from './Welcome'
 import Error from './Error'
 import TodoList from './TodoList'
+import AuthenticatedRoute from './AuthenticatedRoute'
 import LogoutComponent from './Logout'
 import HeaderComponent from './Header'
 import FooterComponent from './Footer'
@@ -18,9 +19,9 @@ class TodoApp extends Component {
                 <Switch>
                     <Route path='/' exact component={Login}/>
                     <Route path='/login' component={Login}/>
-                    <Route path='/welcome/:name' component={Welcome}/>
-                    <Route path='/todolists' component={TodoList}/>
-                    <Route path='/logout' component={LogoutComponent}/>
+                    <AuthenticatedRoute path='/welcome/:name' component={Welcome}/>
+                    <AuthenticatedRoute path='/todolists' component={TodoList}/>
+                    <AuthenticatedRoute path='/logout' component={LogoutComponent}/>
                     <Route path='' component={Error}/>
                 </Switch>
                 <FooterComponent/>
