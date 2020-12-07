@@ -36,7 +36,8 @@ class Login extends Component {
     
     render() {
         return (
-            <div>
+            <div className="container">
+                <h1>Login</h1>
                 Username: <input type="text"
                                  name="username"
                                  value={this.state.username}
@@ -45,8 +46,8 @@ class Login extends Component {
                                  name="password"
                                  value={this.state.password}
                                  onChange={this.handleChange}></input>
-                <button onClick={this.handleLogin}>Login</button>
-                {this.state.hasInvalidLogin && <div className="Error">Invalid login credentials.</div>}
+                <button className="btn btn-success" onClick={this.handleLogin}>Login</button>
+                {this.state.hasInvalidLogin && <div className="alert alert-warning">Invalid login credentials.</div>}
             </div>
         )
     }

@@ -18,31 +18,33 @@ class TodoList extends Component {
     render () {
         return (
             <div>
-                <h1>Todo Lists!</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Description</th>
-                            <th>Done</th>
-                            <th>Target Date:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.todos.map 
-                                (
-                                    todo =>
-                                    <tr>
-                                        <td>{todo.id}</td>
-                                        <td>{todo.description}</td>
-                                        <td>{todo.done.toString()}</td>
-                                        <td>{todo.TargetDate.toString()}</td>
-                                    </tr>
-                                )
-                        }
-                    </tbody>
-                </table>
+                <h1>Todo List</h1>
+                <div className="container">
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Description</th>
+                                <th>Done</th>
+                                <th>Target Date:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.todos.map 
+                                    (
+                                        todo =>
+                                        <tr>
+                                            <td>{todo.id}</td>
+                                            <td>{todo.description}</td>
+                                            <td>{todo.done.toString()}</td>
+                                            <td>{todo.TargetDate.toString()}</td>
+                                        </tr>
+                                    )
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     }

@@ -7,14 +7,3 @@ div, input, button {
     margin: 5px;
     font-weight: bold;
 }
-
-button {
-    background-color: green;
-    font-size: 15px;
-}
-
-.Error {
-    font-size: 25px;
-    font-weight: bold;
-    color: red;
-}
