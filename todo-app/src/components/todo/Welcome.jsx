@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 class Welcome extends Component {
+    
+    constructor(props) {
+        super(props)
+
+        this.retrieveWelcomeMessage = this.retrieveWelcomeMessage.bind(this)
+    }
+    
     render() {
         return (
             <>
@@ -11,8 +18,16 @@ class Welcome extends Component {
                     
                     To manage your todo list, please click <Link to="/todolists">here</Link>.
                 </div>
+                <div className="container">
+                    Click here to get a customized welcome message.
+                    <button onClick={this.retrieveWelcomeMessage} className="btn btn-success">Get Welcome Message</button>
+                </div>
             </>
         )
+    }
+
+    retrieveWelcomeMessage() {
+        console.log("retrieve clicked")
     }
 }
 
