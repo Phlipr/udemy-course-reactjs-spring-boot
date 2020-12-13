@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import HelloWorldService from '../../api/todo/HelloWorldService'
 
 class Welcome extends Component {
     
@@ -27,7 +28,8 @@ class Welcome extends Component {
     }
 
     retrieveWelcomeMessage() {
-        console.log("retrieve clicked")
+        HelloWorldService.executeHelloWorldService()
+        .then( response => console.log(response) )
     }
 }
 
