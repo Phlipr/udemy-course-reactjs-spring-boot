@@ -2,7 +2,11 @@ import Axios from "axios"
 
 class HelloWorldService {
     executeHelloWorldService() {
-        return Axios.get("http://localhost:8080/hello-world")
+        return Axios.get('http://localhost:8080/hello-world')
+    }
+
+    executeHelloWorldBeanService() {
+        return Axios.get('http://localhost:8080/hello-world-bean')
     }
 }
 
