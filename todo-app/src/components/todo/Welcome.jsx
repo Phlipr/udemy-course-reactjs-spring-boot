@@ -9,15 +9,20 @@ class Welcome extends Component {
 
         this.retrieveWelcomeMessage = this.retrieveWelcomeMessage.bind(this)
         this.handleSuccessfulRequest = this.handleSuccessfulRequest.bind(this)
+        this.handleError = this.handleError.bind(this)
 
         this.state = {
-            welcomeMessage : ''
+            welcomeMessage : '',
+            errorMessage : ''
         }
     }
     
     render() {
         return (
             <>
+                {this.state.errorMessage !== '' && <div className="alert alert-warning">
+                    {this.state.errorMessage}
+                </div>}
                 <h1>Welcome!</h1>
                 <div className="container">
                     Welcome, {this.props.match.params.name}!
@@ -41,10 +46,15 @@ class Welcome extends Component {
 
         HelloWorldService.executeHelloWorldPathVariableService(this.props.match.params.name)
         .then( response => this.handleSuccessfulRequest(response) )
+        .catch( error => this.handleError(error) )
     }
 
     handleSuccessfulRequest(response) {
         this.setState( { welcomeMessage : response.data.message } )
+    }
+
+    handleError(error) {
+        this.setState( { errorMessage : error.response.data.message } )
     }
 }
 

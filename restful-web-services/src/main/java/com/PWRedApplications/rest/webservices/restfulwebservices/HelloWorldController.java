@@ -22,6 +22,7 @@ public class HelloWorldController {
 	
 	@GetMapping(path = "/hello-world/path-variable/{name}")
 	public HelloWorldBean helloWorldBean(@PathVariable String name) {
+		//throw new RuntimeException("Something went wrong with the service.");
 		return new HelloWorldBean(String.format("Hello World, %s!", name));
 	}
 }
