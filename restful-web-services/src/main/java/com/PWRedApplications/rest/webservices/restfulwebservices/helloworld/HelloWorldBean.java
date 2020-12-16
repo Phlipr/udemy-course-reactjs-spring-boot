@@ -1,4 +1,4 @@
-package com.PWRedApplications.rest.webservices.restfulwebservices;
+package com.PWRedApplications.rest.webservices.restfulwebservices.helloworld;
 
 public class HelloWorldBean {
 
