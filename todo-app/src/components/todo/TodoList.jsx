@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import TodoDataService from '../../api/todo/TodoDataService'
+import AuthenticationService from './AuthenticationService'
 
 class TodoList extends Component {
     
@@ -8,11 +10,27 @@ class TodoList extends Component {
         this.state = {
             todos : 
                 [
-                    { id: 1, description: "Learn React!", done: false, TargetDate: new Date()},
-                    { id: 2, description: "Visit Grand Canyon", done: false, TargetDate: new Date()},
-                    { id: 3, description: "Learn Mandarin", done: false, TargetDate: new Date()}
+                    // { id: 1, description: "Learn React!", done: false, TargetDate: new Date()},
+                    // { id: 2, description: "Visit Grand Canyon", done: false, TargetDate: new Date()},
+                    // { id: 3, description: "Learn Mandarin", done: false, TargetDate: new Date()}
                 ]
         }
+    }
+
+    componentDidMount() {
+        let username = AuthenticationService.getLoggedInUserName
+        TodoDataService.retrieveAllTodos(username)
+        .then(
+            response => {
+                // console.log(response)
+
+                this.setState(
+                    {
+                        todos : response.data
+                    }
+                )
+            }
+        )
     }
     
     render () {
@@ -34,11 +52,11 @@ class TodoList extends Component {
                                 this.state.todos.map 
                                     (
                                         todo =>
-                                        <tr>
+                                        <tr key={todo.id}>
                                             <td>{todo.id}</td>
                                             <td>{todo.description}</td>
                                             <td>{todo.done.toString()}</td>
-                                            <td>{todo.TargetDate.toString()}</td>
+                                            <td>{todo.targetDate.toString()}</td>
                                         </tr>
                                     )
                             }
