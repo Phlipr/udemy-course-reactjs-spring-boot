@@ -3,6 +3,7 @@ import moment from 'moment'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import TodoDateService from '../../api/todo/TodoDataService'
 import AuthenticationService from './AuthenticationService'
+import TodoDataService from '../../api/todo/TodoDataService'
 
 class TodoComponent extends Component {
     
@@ -20,6 +21,11 @@ class TodoComponent extends Component {
     }
 
     componentDidMount() {
+
+        if (this.state.id === -1) {
+            return
+        }
+
         let username = AuthenticationService.getLoggedInUserName()
 
         TodoDateService.retrieveTodo(username, this.state.id)
@@ -50,11 +56,19 @@ class TodoComponent extends Component {
         //console.log(values)
         let username = AuthenticationService.getLoggedInUserName()
 
-        TodoDateService.updateTodo(username, this.state.id, {
-            id : this.state.id,
-            description : values.description,
-            targetDate : values.targetDate
-        }).then( () => this.props.history.push('/todolists'))
+        let todo = {
+            id: this.state.id,
+            description: values.description,
+            targetDate: values.targetDate
+        }
+
+        if (this.state.id === -1) {
+            TodoDataService.createTodo(username, todo)
+                .then(() => this.props.history.push('/todolists'))
+        } else {
+            TodoDateService.updateTodo(username, this.state.id, todo)
+                .then(() => this.props.history.push('/todolists'))
+        }
     }
     
     render() {
@@ -62,7 +76,7 @@ class TodoComponent extends Component {
         
         return (
             <div>
-                <h1>Todo #{this.props.match.params.id}</h1>
+                <h1>Todo</h1>
                 <div className="container">
                     <Formik
                         initialValues = {{description, targetDate}}

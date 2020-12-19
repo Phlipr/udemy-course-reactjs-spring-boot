@@ -21,6 +21,7 @@ class TodoList extends Component {
         this.deleteTodoClicked = this.deleteTodoClicked.bind(this)
         this.refreshTodos = this.refreshTodos.bind(this)
         this.updateTodoClicked = this.updateTodoClicked.bind(this)
+        this.addTodoClicked = this.addTodoClicked.bind(this)
     }
 
     componentDidMount() {
@@ -75,6 +76,9 @@ class TodoList extends Component {
                             }
                         </tbody>
                     </table>
+                    <div className="row">
+                        <button className="btn btn-success" onClick={this.addTodoClicked}>Add</button>
+                    </div>
                 </div>
             </div>
         )
@@ -94,6 +98,10 @@ class TodoList extends Component {
 
     updateTodoClicked(id) {
         this.props.history.push(`todolists/${id}`)
+    }
+
+    addTodoClicked() {
+        this.props.history.push("todolists/-1")
     }
 }
 
