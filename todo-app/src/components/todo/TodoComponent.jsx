@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { Field, Form, Formik } from 'formik'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 
 class TodoComponent extends Component {
     
@@ -14,6 +14,24 @@ class TodoComponent extends Component {
         }
 
         this.onSubmit = this.onSubmit.bind(this)
+        this.validate = this.validate.bind(this)
+    }
+
+    validate(values) {
+        let errors = {}
+
+        if (!values.description) {
+            errors.description = "Enter a Description."
+        }
+        else if (values.description.length < 5) {
+            errors.description = "Enter at least 5 characters in the Description."
+        }
+
+        if (!moment(values.targetDate).isValid()) {
+            errors.targetDate = "Enter a valid Target Date."
+        }
+
+        return errors
     }
 
     onSubmit(values) {
@@ -29,15 +47,24 @@ class TodoComponent extends Component {
                 <div className="container">
                     <Formik
                         initialValues = {{description, targetDate}}
+                        validateOnChange={false}
+                        validateOnBlur={false}
+                        validate={this.validate}
                         onSubmit={this.onSubmit}
                     >
                         {
                             (props) => (
                                 <Form>
+                                    <ErrorMessage name="description"
+                                                  component="div"
+                                                  className="alert alert-warning" />
                                     <fieldset className="form-group">
                                         <label>Description</label>
                                         <Field className="form-control" type="text" name="description"/>
                                     </fieldset>
+                                    <ErrorMessage name="targetDate"
+                                                  component="div"
+                                                  className="alert alert-warning" />
                                     <fieldset className="form-group">
                                         <label>Target Date</label>
                                         <Field className="form-control" type="date" name="targetDate"/>
