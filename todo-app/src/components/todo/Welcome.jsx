@@ -54,7 +54,17 @@ class Welcome extends Component {
     }
 
     handleError(error) {
-        this.setState( { errorMessage : error.response.data.message } )
+        let errorMsg = '';
+
+        if (error.message) {
+            errorMsg += error.message
+        }
+
+        if (error.response && error.response.data) {
+            errorMsg += error.response.data.message
+        }
+
+        this.setState( { errorMessage : errorMsg } )
     }
 }
 
