@@ -26,14 +26,29 @@ class Login extends Component {
     }
 
     handleLogin() {
-        if (this.state.username === "PReynolds" && this.state.password === "Unique") {
-            AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
-            this.props.history.push(`/welcome/${this.state.username}`)
-            this.setState( { hasInvalidLogin : false } )  
-        }
-        else {
-            this.setState( { hasInvalidLogin : true } )
-        }
+        // if (this.state.username === "PReynolds" && this.state.password === "Unique") {
+        //     AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
+        //     this.props.history.push(`/welcome/${this.state.username}`)
+        //     this.setState( { hasInvalidLogin : false } )  
+        // }
+        // else {
+        //     this.setState( { hasInvalidLogin : true } )
+        // }
+
+        AuthenticationService
+        .executeBasicAuthenticationService(this.state.username, this.state.password)
+        .then(
+            () => {
+                AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
+                this.props.history.push(`/welcome/${this.state.username}`)
+                this.setState( { hasInvalidLogin : false } )
+            }
+        )
+        .catch(
+            () => {
+                this.setState( { hasInvalidLogin : true } )
+            }
+        )
     }
     
     render() {
