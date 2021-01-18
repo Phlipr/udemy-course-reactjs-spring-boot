@@ -29,7 +29,7 @@ class TodoList extends Component {
     }
 
     refreshTodos() {
-        let username = AuthenticationService.getLoggedInUserName
+        let username = AuthenticationService.getLoggedInUserName()
         TodoDataService.retrieveAllTodos(username)
         .then(
             response => {
