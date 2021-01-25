@@ -35,11 +35,26 @@ class Login extends Component {
         //     this.setState( { hasInvalidLogin : true } )
         // }
 
+        // AuthenticationService
+        // .executeBasicAuthenticationService(this.state.username, this.state.password)
+        // .then(
+        //     () => {
+        //         AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
+        //         this.props.history.push(`/welcome/${this.state.username}`)
+        //         this.setState( { hasInvalidLogin : false } )
+        //     }
+        // )
+        // .catch(
+        //     () => {
+        //         this.setState( { hasInvalidLogin : true } )
+        //     }
+        // )
+
         AuthenticationService
-        .executeBasicAuthenticationService(this.state.username, this.state.password)
+        .executeJwtAuthenticationService(this.state.username, this.state.password)
         .then(
-            () => {
-                AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
+            (response) => {
+                AuthenticationService.registerSuccessfulJwtLogin(this.state.username, response.data.token)
                 this.props.history.push(`/welcome/${this.state.username}`)
                 this.setState( { hasInvalidLogin : false } )
             }
