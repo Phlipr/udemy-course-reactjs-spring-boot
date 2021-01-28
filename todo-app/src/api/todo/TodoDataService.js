@@ -1,13 +1,13 @@
 import Axios from 'axios'
-import { API_URL } from '../../Constants.js'
+import { API_URL, JPA_API_URL } from '../../Constants.js'
 
 class TodoDataService {
     retrieveAllTodos(name) {
-        return Axios.get(`${API_URL}/users/${name}/todos`)
+        return Axios.get(`${JPA_API_URL}/users/${name}/todos`)
     }
 
     retrieveTodo(name, id) {
-        return Axios.get(`${API_URL}/users/${name}/todos/${id}`)
+        return Axios.get(`${JPA_API_URL}/users/${name}/todos/${id}`)
     }
 
     deleteTodo(name, id) {
