@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import { JPA_API_URL } from '../../Constants.js'
+import { API_URL, JPA_API_URL } from '../../Constants.js'
 
 class TodoDataService {
     retrieveAllTodos(name) {
@@ -11,15 +11,15 @@ class TodoDataService {
     }
 
     deleteTodo(name, id) {
-        return Axios.delete(`${JPA_API_URL}/users/${name}/todos/${id}`)
+        return Axios.delete(`${API_URL}/users/${name}/todos/${id}`)
     }
 
     updateTodo(name, id, todo) {
-        return Axios.put(`${JPA_API_URL}/users/${name}/todos/${id}`, todo)
+        return Axios.put(`${API_URL}/users/${name}/todos/${id}`, todo)
     }
 
     createTodo(name, todo) {
-        return Axios.post(`${JPA_API_URL}/users/${name}/todos`, todo)
+        return Axios.post(`${API_URL}/users/${name}/todos`, todo)
     }
 }
 
